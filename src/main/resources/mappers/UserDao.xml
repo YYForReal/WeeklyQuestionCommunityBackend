@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+1.未登录的游客只能浏览，不能评论和发表文章、回答；
+2.登录：用户点击登录按钮后，post账号密码，到数据库里检验，如果正确则跳转到首页，否则提示错误；
+3.注册：用户名合法则发送请求，检查用户名是否重复；注册成功后，密码用md5加密，数据库添加新用户，自动登录并跳转首页；
+4.修改密码：首先验证身份，发送请求验证密码是否正确；输入新密码后update；
+5.绑定邮箱：update email；
+-->
+<mapper namespace="com.hyy.weeklyquestionbackend.dao.UserDao">
+
+    <!--get all user's userId-->
+    <select id="getAllUserId" resultType="string">
+        select user_id as 'userId'
+        from users
+    </select>
+
+    <!--get the user's info by userId-->
+    <select id="getUserInfoById" parameterType="String" resultType="com.hyy.weeklyquestionbackend.bean.User">
+        select user_id     as 'userId',
+               username    as 'userName',
+               password    as 'password',
+               avatar      as 'avatar',
+               email       as 'email',
+               description as 'description',
+               background  as 'background'
+        from users
+        where user_id = #{userId}
+    </select>
+
+    <!--insert the login info to database-->
+    <insert id="insertLoginInfo">
+        insert into users (user_id, username, password,description)
+        values (#{userId}, #{userId}, #{password},'知道得越多，不知道的就越多。')
+    </insert>
+
+    <!--update the avatar url-->
+    <update id="updateAvatarUrl">
+        update users
+        <set>
+            avatar=#{avatar}
+        </set>
+        where user_id=#{userId}
+    </update>
+
+    <update id="updateBackground">
+        update users
+        <set>
+            background=#{background}
+        </set>
+        where user_id=#{userId}
+    </update>
+
+    <!--update email-->
+    <update id="updateEmail">
+        update users
+        <set>
+            <if test="email != null">email=#{email}</if>
+        </set>
+        where user_id = #{userId}
+    </update>
+
+    <!--update password-->
+    <update id="updatePassword">
+        update users
+        <set>
+            <if test="password != null">password = #{password}</if>
+        </set>
+        where user_id = #{userId}
+    </update>
+
+    <update id="updateDescription">
+        update users
+        <set>
+            description=#{description}
+        </set>
+        where user_id = #{userId}
+    </update>
+
+    <update id="updateUserName">
+        update users
+        <set>
+            <if test="userName != null">userName = #{userName}</if>
+        </set>
+        where user_id = #{userId}
+    </update>
+
+    <select id="token">
+        select IF(user_id = #{userId} and password = #{password}, "true", "false")
+        from users
+    </select>
+</mapper>

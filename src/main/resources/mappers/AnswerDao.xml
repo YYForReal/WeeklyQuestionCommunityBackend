@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hyy.weeklyquestionbackend.dao.AnswerDao">
+    <!--根据文章id拿到回答-->
+    <select id="getAnswersByArticle" resultType="com.hyy.weeklyquestionbackend.bean.Answer">
+        select answers.answer_id as 'answerId' ,answers.author_id as 'authorId',answers.content,  answers.release_time as 'releaseTime' ,
+                answers.update_time as 'updateTime' , answers.agree , answers.show_times as 'showTimes' ,
+                users.username as 'authorName' ,users.description as 'authorDescription',users.avatar as 'authorAvatar'
+        from answers
+        inner join users on answers.author_id = users.user_id
+        where answers.article_id = #{articleId}
+    </select>
+
+
+    <!--赞同回答-->
+    <update id="agreeAnswer">
+        update answers
+        SET agree = (agree + #{agreeNumber})
+        WHERE answer_id = #{answerId}
+    </update>
+
+    <!--增加查看次数-->
+    <update id="addShowTimes">
+        update answers
+        SET show_times= show_times+1
+        WHERE answer_id = #{answerId}
+    </update>
+
+
+    <!--增加回答-->
+    <insert id="postAnswer">
+        insert into answers(article_id,author_id , content  , release_time , update_time )
+        values(#{articleId} , #{authorId} , #{content} , #{releaseTime} , #{releaseTime} );
+    </insert>
+
+
+
+</mapper>

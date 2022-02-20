@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hyy.weeklyquestionbackend.dao.ArticleDao">
+
+    <!--拿所有的文章-->
+    <select id="getArticles" resultType="com.hyy.weeklyquestionbackend.bean.Article">
+        select articles.article_id as 'articleId' , articles.title , articles.content , articles.author_id as 'authorId' ,
+                articles.create_time as 'releaseTime' ,articles.update_time as 'updateTime' , articles.agree as 'agree' ,
+                articles.type as 'type', articles.tags as 'tags',articles.show_times as 'showTimes' , articles.img as 'img',
+                users.username as 'authorName' , users.description as 'authorDescription'
+        from articles
+        INNER JOIN users on articles.author_id = users.user_id
+        order by agree desc;
+    </select>
+
+    <select id="getLastInsertId" resultType="String">
+        select LAST_INSERT_ID();
+    </select>
+
+
+    <!--获取热榜文章-->
+    <select id = "getHotArticles" resultType="com.hyy.weeklyquestionbackend.bean.HotArticle">
+        select article_id as 'articleId' ,title,content,agree*10+show_times as 'hot',img
+        from articles
+        order by hot desc;
+    </select>
+
+    <!--根据作者id拿到文章-->
+    <select id="getArticlesFromAuthor" parameterType="String" resultType="com.hyy.weeklyquestionbackend.bean.Article">
+        select articles.article_id as 'articleId' , articles.title , articles.content , articles.author_id as 'authorId' ,
+                articles.create_time as 'releaseTime' ,articles.update_time as 'updateTime' , articles.agree as 'agree' ,
+                articles.type as 'type', articles.tags as 'tags',articles.show_times as 'showTimes' , articles.img as 'img',
+                users.username as 'authorName' , users.description as 'authorDescription'
+        from articles
+        inner join users on articles.author_id = users.user_id
+        where articles.author_id = #{authorId}
+        order by releaseTime desc;
+    </select>
+
+    <!--根据文章id拿到文章-->
+    <select id="getArticlesFromId" parameterType="Integer" resultType="com.hyy.weeklyquestionbackend.bean.Article">
+        select article_id as 'articleId' , title , content , author_id as 'authorId' , create_time as 'releaseTime' ,update_time as 'updateTime' , agree ,type , tags ,show_times as 'showTimes' , img   from articles where article_id = #{articleId}
+    </select>
+
+
+
+<!--    insert && update-->
+
+    <!--创建文章-->
+
+    <insert id="postArticle">
+        insert into articles(title , content , author_id , create_time , update_time,type , tags )
+        values(#{title} , #{content} , #{authorId} , #{time} , #{time},#{type} ,#{tags}    );
+    </insert>
+
+
+    <!--创建封面文章-->
+    <insert id="postArticleWithImg">
+        insert into articles(title , content , author_id , create_time , update_time,type , tags,img )
+        values(#{title} , #{content} , #{authorId} , #{time} , #{time},#{type} ,#{tags}  ,#{img}  );
+    </insert>
+
+
+    <!--赞同文章-->
+    <update id="agreeArticle">
+        update articles
+        SET agree = (agree + #{agreeNumber})
+        WHERE article_id = #{articleId}
+    </update>
+
+
+    <!--修改文章-->
+    <update id="changeArticle">
+        update articles
+        SET title = #{title}, content = #{content},update_time = #{time}
+        WHERE article_id = #{articleId}
+    </update>
+
+    <update id="addShowTimes">
+        update articles
+        SET show_times= show_times+1
+        WHERE article_id = #{articleId}
+    </update>
+
+
+
+    <!--  获取类型是type排行榜中第start部电影开始的limit部电影的简略信息   -->
+<!--    <select id="getMoiveRank" resultType="com.ruangong.yingbangbang.bean.movie.MovieBrief">-->
+<!--        SELECT m.movie_id AS movieId, m.rate, m.title, m.pictrue_url AS pictrueUrl-->
+<!--        FROM movie AS m-->
+<!--                 JOIN M_T AS mt-->
+<!--                      ON m.movie_id = mt.movie_id-->
+<!--        WHERE mt.type_id = #{type_id}-->
+<!--        ORDER BY m.rate DESC-->
+<!--            LIMIT #{start}, #{limit};-->
+<!--    </select>-->
+
+
+</mapper>

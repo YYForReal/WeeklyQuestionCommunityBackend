@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hyy.weeklyquestionbackend.dao.ReviewDao">
+
+    <!--根据id拿到评论-->
+    <select id="getReviews" parameterType="Integer" resultType="com.hyy.weeklyquestionbackend.bean.Review">
+        select reviews.review_id as 'reviewId', reviews.content as 'content' ,
+                reviews.user_id as 'userId',  users.username as 'userName',  users.avatar as 'userAvatar' ,
+                reviews.release_time as 'releaseTime' , reviews.agree as 'agree'
+        from reviews
+        inner join users on reviews.user_id = users.user_id
+        where reviews.type = #{type} and reviews.article_id = #{articleId}
+        order by reviews.release_time desc;
+    </select>
+
+    <!--赞同评论-->
+    <update id="agreeReview">
+        update reviews
+        SET agree = (agree + #{agreeNumber})
+        WHERE review_id = #{reviewId}
+    </update>
+
+
+    <!--上传评论-->
+    <insert id="postReview">
+        insert into reviews(content ,article_id, user_id , release_time ,type  )
+        values( #{content} ,#{articleId}, #{userId} , #{releaseTime} ,#{type}    );
+    </insert>
+
+
+
+</mapper>

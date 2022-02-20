@@ -1,0 +1,22 @@
+# mysql
+spring:
+  datasource:
+    #MySQL配置
+    url: jdbc:mysql://118.31.165.150:3306/community?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: community_manager
+    password: manager123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+#找到mappers
+mybatis:
+  #标注待解析的mapper的xml文件位置
+  mapper-locations: classpath:mappers/*.xml
+  #标注实体类位置
+  type-aliases-package: com.hyy.weeklyquestionbackend.bean
+  #字段null也返回
+  configuration:
+    call-setters-on-nulls: true
+
+server:
+  port: 9630
+
