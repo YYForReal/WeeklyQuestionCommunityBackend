@@ -23,7 +23,7 @@ public class ArticleController {
     @Autowired
     ArticleService articleService;
 
-    //根据作者获取文章
+    //根据作者ID获取文章
     @GetMapping("/getArticlesFromAuthor")
     public List<Article> getArticlesFromAuthor(String authorId) {
         List<Article> list = articleService.getArticlesFromAuthor(authorId);
@@ -39,6 +39,21 @@ public class ArticleController {
         Article  article = articleService.getArticleFromId(articleId);
         return article;
     }
+
+    //根据文章id修改文章
+    @GetMapping("/update")
+    public Article updateArticlesFromId(Integer articleId) {
+        Article  article = articleService.getArticleFromId(articleId);
+        return article;
+    }
+
+    //根据文章id删除文章
+    @PostMapping("/delete")
+    public Article deleteArticleFromId(Integer articleId) {
+        Article  article = articleService.getArticleFromId(articleId);
+        return article;
+    }
+
 
     //拿所有的文章
     @GetMapping("/getAll")
