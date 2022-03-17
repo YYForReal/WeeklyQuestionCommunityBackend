@@ -17,6 +17,7 @@ target/
 *.iws
 *.iml
 *.ipr
+*.sql
 
 ### NetBeans ###
 /nbproject/private/
@@ -30,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+src/main/resources/application.yml
+
+

@@ -1,10 +1,9 @@
-package com.hyy.weeklyquestionbackend.dao;
+package com.hyy.weeklyquestionbackend.service;
 
 import com.hyy.weeklyquestionbackend.bean.Review;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Date;
 import java.util.List;
 
 @Repository
@@ -12,7 +11,7 @@ public interface ReviewDao {
 
 //    List<Review> getReviews(@Param("answerId") Integer answerId);
 
-    List<Review> getReviews(@Param("type") Integer type,@Param("articleId") Integer articleId);
+    List<Review> getReviews(@Param("type") Integer type, @Param("articleId") Integer articleId);
 
     Integer agreeReview(@Param("reviewId") Integer reviewId, @Param("agreeNumber") Integer agreeNumber);
 

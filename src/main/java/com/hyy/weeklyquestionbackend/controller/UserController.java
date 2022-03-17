@@ -1,11 +1,11 @@
 package com.hyy.weeklyquestionbackend.controller;
 
 import com.hyy.weeklyquestionbackend.bean.User;
-import com.hyy.weeklyquestionbackend.service.UserService;
+import com.hyy.weeklyquestionbackend.service.impl.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.Set;
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -16,7 +16,7 @@ public class UserController {
     UserService userService;
 
     @GetMapping("/getAllUserId")
-    public Set<String> getAllUserId() {
+    public List<String> getAllUserId() {
         return userService.getAllUserId();
     }
 
@@ -60,8 +60,19 @@ public class UserController {
         return userService.updateBackground(userId, background) ? "OK" : "FAIL";
     }
 
-    @GetMapping("/token")
-    public boolean token(String userId, String password) {
-        return userService.token(userId, password);
+    @GetMapping("/getArticleNumber")
+    public int getArticleNumber(String userId) {
+        return userService.getArticleNumber(userId);
     }
+
+    @GetMapping("/getAnswerNumber")
+    public int getAnswerNumber(String userId) {
+        return userService.getAnswerNumber(userId);
+    }
+
+    @GetMapping("/getChoiceNumber")
+    public int getChoiceNumber(String userId) {
+        return userService.getChoiceNumber(userId);
+    }
+
 }
