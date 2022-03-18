@@ -101,10 +101,10 @@
     </select>
 
     <select id="getChoiceNumber" resultType="int">
-        SELECT COUNT(*)
-        FROM choices
-                 INNER JOIN articles ON choices.article_id = articles.article_id
-        where articles.author_id = #{userId}
+        SELECT count(*)
+        FROM articles
+        WHERE author_id = #{userId}
+          AND type = 2
     </select>
 
 </mapper>

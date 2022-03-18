@@ -1,6 +1,7 @@
 package com.hyy.weeklyquestionbackend.controller;
 
 import com.hyy.weeklyquestionbackend.bean.User;
+import com.hyy.weeklyquestionbackend.bean.UserCard;
 import com.hyy.weeklyquestionbackend.service.impl.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -60,19 +61,9 @@ public class UserController {
         return userService.updateBackground(userId, background) ? "OK" : "FAIL";
     }
 
-    @GetMapping("/getArticleNumber")
-    public int getArticleNumber(String userId) {
-        return userService.getArticleNumber(userId);
-    }
-
-    @GetMapping("/getAnswerNumber")
-    public int getAnswerNumber(String userId) {
-        return userService.getAnswerNumber(userId);
-    }
-
-    @GetMapping("/getChoiceNumber")
-    public int getChoiceNumber(String userId) {
-        return userService.getChoiceNumber(userId);
+    @GetMapping("/getUserCardInfo")
+    public UserCard getUserCardInfo(String userId) {
+        return userService.getUserCardInfo(userId);
     }
 
 }
