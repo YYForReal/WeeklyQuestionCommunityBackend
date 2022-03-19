@@ -29,7 +29,7 @@ public interface UserDao {
 
     int getArticleNumber(@Param("userId") String userId);
 
-    int getAnswerNumber(@Param("userId") String userId);
+    int getQuestionNumber(@Param("userId") String userId);
 
     int getChoiceNumber(@Param("userId") String userId);
 

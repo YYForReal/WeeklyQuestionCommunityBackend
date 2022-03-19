@@ -10,7 +10,7 @@ import lombok.Data;
  */
 @Data
 public class UserCard {
-    private Integer answerNum;
+    private Integer questionNum;
     private Integer articleNum;
     private Integer choiceNum;
 }

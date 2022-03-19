@@ -92,12 +92,14 @@
         SELECT COUNT(*)
         FROM articles
         where author_id = #{userId}
+          AND type = 1
     </select>
 
-    <select id="getAnswerNumber" resultType="int">
+    <select id="getQuestionNumber" resultType="int">
         SELECT COUNT(*)
-        FROM answers
+        FROM articles
         where author_id = #{userId}
+          AND type = 0
     </select>
 
     <select id="getChoiceNumber" resultType="int">

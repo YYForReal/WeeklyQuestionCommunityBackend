@@ -64,8 +64,8 @@ public class UserService {
     }
 
 
-    public int getAnswerNumber(String userId) {
-        return userDao.getAnswerNumber(userId);
+    public int getQuestionNumber(String userId) {
+        return userDao.getQuestionNumber(userId);
     }
 
 
@@ -84,7 +84,7 @@ public class UserService {
     public UserCard getUserCardInfo(String userId) {
         UserCard userCard = new UserCard();
         userCard.setArticleNum(getArticleNumber(userId));
-        userCard.setAnswerNum(getAnswerNumber(userId));
+        userCard.setQuestionNum(getQuestionNumber(userId));
         userCard.setChoiceNum(getChoiceNumber(userId));
         return userCard;
     }
