@@ -2,7 +2,7 @@
 spring:
   datasource:
     #MySQL配置
-    url: jdbc:mysql://118.31.165.150/community?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://118.31.165.150:3306/community?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: community_manager
     password: manager123
     driver-class-name: com.mysql.cj.jdbc.Driver

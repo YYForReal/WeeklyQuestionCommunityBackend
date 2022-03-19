@@ -1,7 +1,6 @@
 package com.hyy.weeklyquestionbackend.service.impl;
 
 import com.hyy.weeklyquestionbackend.bean.User;
-import com.hyy.weeklyquestionbackend.bean.UserCard;
 import com.hyy.weeklyquestionbackend.service.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,28 +63,12 @@ public class UserService {
     }
 
 
-    public int getQuestionNumber(String userId) {
-        return userDao.getQuestionNumber(userId);
+    public int getAnswerNumber(String userId) {
+        return userDao.getAnswerNumber(userId);
     }
 
 
     public int getChoiceNumber(String userId) {
         return userDao.getChoiceNumber(userId);
-    }
-
-    /**
-     * 获取用户悬浮卡片信息
-     *
-     * @param userId
-     * @return com.hyy.weeklyquestionbackend.bean.UserCard
-     * @author bjyh
-     * @date 2022/3/19 7:53
-     */
-    public UserCard getUserCardInfo(String userId) {
-        UserCard userCard = new UserCard();
-        userCard.setArticleNum(getArticleNumber(userId));
-        userCard.setQuestionNum(getQuestionNumber(userId));
-        userCard.setChoiceNum(getChoiceNumber(userId));
-        return userCard;
     }
 }

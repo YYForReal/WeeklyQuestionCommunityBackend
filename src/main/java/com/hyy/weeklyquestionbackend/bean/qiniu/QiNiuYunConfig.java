@@ -27,10 +27,10 @@ import java.io.IOException;
 @Data
 @Component
 public class QiNiuYunConfig {
-    private String accessKey = "";//密钥
-    private String secretKey = "";//密钥
-    private String bucket = "";//空间名
-    private String path = "";//域名
+    private String accessKey = "";  //密钥
+    private String secretKey = "";  //密钥
+    private String bucket = "yyforreal";//空间名
+    private String path = "cdn.yywebsite.cn";//域名
 
     /**
      * 获取七牛云的Token

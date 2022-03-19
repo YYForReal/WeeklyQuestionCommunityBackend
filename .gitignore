@@ -18,6 +18,11 @@ target/
 *.iml
 *.ipr
 *.sql
+<<<<<<< Updated upstream
+=======
+src/main/java/com/hyy/weeklyquestionbackend/bean/qiniu/QiNiuYunConfig.java
+src/main/resources/application.yml
+>>>>>>> Stashed changes
 
 ### NetBeans ###
 /nbproject/private/

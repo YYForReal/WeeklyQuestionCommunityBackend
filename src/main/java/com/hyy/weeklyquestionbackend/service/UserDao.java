@@ -26,7 +26,14 @@ public interface UserDao {
     int updateUserName(@Param("userId") String userId, @Param("userName") String userName);
 
     int updatePassword(@Param("userId") String userId, @Param("password") String password);
-
+    /**
+     * 获取用户的文章数量
+     *
+     * @param userId
+     * @return int
+     * @author bjyh
+     * @date 2022/3/17 17:50
+     */
     int getArticleNumber(@Param("userId") String userId);
 
     int getQuestionNumber(@Param("userId") String userId);
