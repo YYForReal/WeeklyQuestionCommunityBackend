@@ -34,11 +34,12 @@ public interface ArticleDao {
     Integer agreeArticle(@Param("articleId") Integer articleId, @Param("agreeNumber") Integer agreeNumber);
 
     Integer addShowTimes(@Param("articleId") Integer articleId);
-
     Article getArticlesFromId(@Param("articleId") Integer articleId);
 
     //获取热榜文章
     List<HotArticle> getHotArticles();
 
     String getLastInsertId();
+
+    Integer deleteArticle(@Param("articleId") Integer articleId);
 }

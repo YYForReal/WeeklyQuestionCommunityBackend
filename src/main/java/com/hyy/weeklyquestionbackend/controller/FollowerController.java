@@ -2,10 +2,7 @@ package com.hyy.weeklyquestionbackend.controller;
 
 import com.hyy.weeklyquestionbackend.service.impl.FollowerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author bjyh
@@ -15,14 +12,19 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/follower")
+@CrossOrigin
 public class FollowerController {
 
     @Autowired
     FollowerService followerService;
 
     @PostMapping("/follow")
-    public String follow(String userId, String followerId) {
-        return followerService.follow(userId, followerId) == 1 ? "OK" : "Error";
+    public String follow(String userId, String followerId) throws Exception{
+        try{
+            return followerService.follow(userId, followerId) == 1 ? "OK" : "Error";
+        }catch(Exception e){
+            throw new Exception("关注失败");
+        }
     }
 
     @PostMapping("/unfollow")
@@ -30,7 +32,7 @@ public class FollowerController {
         return followerService.unfollow(userId, followerId) == 1 ? "OK" : "Error";
     }
 
-    @GetMapping("/getFollowerNumber")
+    @GetMapping("/s")
     public Integer getFollowerNumber(String userId) {
         return followerService.getFollowerNumber(userId);
     }

@@ -171,4 +171,14 @@ public class ArticleService {
             System.out.println("error in insertChoices" + e);
         }
     }
+
+
+    public boolean deleteArticle(Integer articleId) {
+        int result = articleDao.deleteArticle(articleId);
+        System.out.println("delete" + result);
+        if (result > 0) {
+            return true;
+        }
+        return false;
+    }
 }

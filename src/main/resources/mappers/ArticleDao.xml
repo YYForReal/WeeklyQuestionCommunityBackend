@@ -115,7 +115,9 @@
         WHERE article_id = #{articleId}
     </update>
 
-
+    <delete id="deleteArticle">
+        delete from articles where article_id = #{articleId}
+    </delete>
     <!--  获取类型是type排行榜中第start部电影开始的limit部电影的简略信息   -->
     <!--    <select id="getMoiveRank" resultType="com.ruangong.yingbangbang.bean.movie.MovieBrief">-->
     <!--        SELECT m.movie_id AS movieId, m.rate, m.title, m.pictrue_url AS pictrueUrl-->
