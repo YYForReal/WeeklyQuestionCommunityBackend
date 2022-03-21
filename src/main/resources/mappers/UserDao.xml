@@ -95,14 +95,14 @@
           AND type = 1
     </select>
 
-    <select id="getQuestionNumber" resultType="int">
+    <select id="getQuestionNumber" resultType="Integer">
         SELECT COUNT(*)
         FROM articles
         where author_id = #{userId}
           AND type = 0
     </select>
 
-    <select id="getChoiceNumber" resultType="int">
+    <select id="getChoiceNumber" resultType="Integer">
         SELECT count(*)
         FROM articles
         WHERE author_id = #{userId}
