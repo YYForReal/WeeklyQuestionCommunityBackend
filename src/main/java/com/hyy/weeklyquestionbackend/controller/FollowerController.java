@@ -1,11 +1,11 @@
 package com.hyy.weeklyquestionbackend.controller;
 
+import com.hyy.weeklyquestionbackend.bean.FollowerCard;
 import com.hyy.weeklyquestionbackend.service.impl.FollowerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author bjyh
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/follower")
+@CrossOrigin
 public class FollowerController {
 
     @Autowired
@@ -33,5 +34,15 @@ public class FollowerController {
     @GetMapping("/getFollowerNumber")
     public Integer getFollowerNumber(String userId) {
         return followerService.getFollowerNumber(userId);
+    }
+
+    @GetMapping("/getFollowerList")
+    public List<FollowerCard> getFollowerList(String userId) {
+        return followerService.getFollowerList(userId);
+    }
+
+    @GetMapping("/checkFollowing")
+    public Boolean checkFollowing(String id1, String id2) {
+        return followerService.checkFollowing(id1, id2) == 1;
     }
 }

@@ -24,4 +24,20 @@
         FROM follower
         WHERE user_id = #{userId}
     </select>
+
+    <!--获取粉丝列表-->
+    <select id="getFollowerList" resultType="com.hyy.weeklyquestionbackend.bean.FollowerCard">
+        SELECT username, avatar, description
+        FROM users
+        WHERE user_id IN
+              (SELECT follower_id FROM follower WHERE user_id = #{userId})
+    </select>
+
+    <!--判断id2是否是id1的粉丝-->
+    <select id="checkFollowing" resultType="Integer">
+        SELECT COUNT(*)
+        FROM follower
+        WHERE user_id = #{id1}
+          AND follower_id = #{id2}
+    </select>
 </mapper>

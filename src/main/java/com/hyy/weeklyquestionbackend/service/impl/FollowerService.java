@@ -1,8 +1,11 @@
 package com.hyy.weeklyquestionbackend.service.impl;
 
+import com.hyy.weeklyquestionbackend.bean.FollowerCard;
 import com.hyy.weeklyquestionbackend.service.FollowerDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author bjyh
@@ -27,4 +30,13 @@ public class FollowerService {
     public Integer getFollowerNumber(String userId) {
         return followerDao.getFollowerNumber(userId);
     }
+
+    public List<FollowerCard> getFollowerList(String userId) {
+        return followerDao.getFollowerList(userId);
+    }
+
+    public int checkFollowing(String id1, String id2) {
+        return followerDao.checkFollowing(id1, id2);
+    }
+
 }

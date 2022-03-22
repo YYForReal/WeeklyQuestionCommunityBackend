@@ -1,7 +1,10 @@
 package com.hyy.weeklyquestionbackend.service;
 
+import com.hyy.weeklyquestionbackend.bean.FollowerCard;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @author bjyh
@@ -33,4 +36,16 @@ public interface FollowerDao {
      * @date 2022/3/20 16:45
      */
     Integer getFollowerNumber(@Param("userId") String userId);
+
+    /**
+     * 获取粉丝列表
+     *
+     * @param userId
+     * @return java.util.List<com.hyy.weeklyquestionbackend.bean.FollowerCard>
+     * @author bjyh
+     * @date 2022/3/21 9:20
+     */
+    List<FollowerCard> getFollowerList(@Param("userId") String userId);
+
+    int checkFollowing(@Param("id1") String id1, @Param("id2") String id2);
 }
