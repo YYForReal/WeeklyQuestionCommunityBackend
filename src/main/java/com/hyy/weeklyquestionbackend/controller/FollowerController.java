@@ -22,10 +22,10 @@ public class FollowerController {
     FollowerService followerService;
 
     @PostMapping("/follow")
-    public String follow(String userId, String followerId) throws Exception{
-        try{
+    public String follow(String userId, String followerId) throws Exception {
+        try {
             return followerService.follow(userId, followerId) == 1 ? "OK" : "Error";
-        }catch(Exception e){
+        } catch (Exception e) {
             throw new Exception("关注失败");
         }
     }
