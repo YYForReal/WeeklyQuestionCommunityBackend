@@ -22,8 +22,12 @@ public class FollowerController {
     FollowerService followerService;
 
     @PostMapping("/follow")
-    public String follow(String userId, String followerId) {
-        return followerService.follow(userId, followerId) == 1 ? "OK" : "Error";
+    public String follow(String userId, String followerId) throws Exception{
+        try{
+            return followerService.follow(userId, followerId) == 1 ? "OK" : "Error";
+        }catch(Exception e){
+            throw new Exception("关注失败");
+        }
     }
 
     @PostMapping("/unfollow")

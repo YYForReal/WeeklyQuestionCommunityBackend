@@ -19,8 +19,12 @@ public class FollowerService {
     @Autowired
     FollowerDao followerDao;
 
-    public int follow(String userId, String followerId) {
-        return followerDao.follow(userId, followerId);
+    public int follow(String userId, String followerId) throws Exception{
+        try{
+            return followerDao.follow(userId, followerId);
+        }catch(Exception err){
+            throw new Exception("关注失败");
+        }
     }
 
     public int unfollow(String userId, String followerId) {

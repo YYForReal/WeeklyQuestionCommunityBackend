@@ -45,11 +45,15 @@ public class ArticleController {
         return article;
     }
 
-    //根据文章id删除文章
+
+    //删除文章
     @PostMapping("/delete")
-    public Article deleteArticleFromId(Integer articleId) {
-        Article  article = articleService.getArticleFromId(articleId);
-        return article;
+    public String deleteArticle(Integer articleId) {
+        if (articleService.deleteArticle(articleId)) {
+            return "OK";
+        } else {
+            return "fail";
+        }
     }
 
 
@@ -141,6 +145,11 @@ public class ArticleController {
             return "fail";
         }
     }
+
+
+
+
+
 
     //赞同文章
     @PostMapping("/agree")

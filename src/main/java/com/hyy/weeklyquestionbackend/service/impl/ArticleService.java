@@ -29,9 +29,6 @@ public class ArticleService {
     @Autowired
     QiNiuYunConfig qiNiuYunConfig;
 
-//    @Autowired
-//    ChoiceMapper choiceMapper;
-
     @Autowired
     ChoiceDao choiceDao;
 
@@ -45,10 +42,6 @@ public class ArticleService {
         return list;
     }
 
-//    获取所有文章
-//    public List<Map<String,Object>> getArticles2(){
-//        return articleDao.getArticles();
-//    }
 
     public List<Article> getArticles() {
         List<Article> list = articleDao.getArticles();
@@ -170,5 +163,15 @@ public class ArticleService {
         } catch (Exception e) {
             System.out.println("error in insertChoices" + e);
         }
+    }
+
+
+    public boolean deleteArticle(Integer articleId) {
+        int result = articleDao.deleteArticle(articleId);
+        System.out.println("delete" + result);
+        if (result > 0) {
+            return true;
+        }
+        return false;
     }
 }
