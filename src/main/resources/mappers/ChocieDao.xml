@@ -2,18 +2,18 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.hyy.weeklyquestionbackend.dao.ChoiceDao">
+<mapper namespace="com.hyy.weeklyquestionbackend.service.ChoiceDao">
 
     <select id="selectChoices" resultType="com.hyy.weeklyquestionbackend.bean.Choice">
-        select content,is_correct as 'isCorrect' from choices where article_id = #{articleId};
+        select content, is_correct as 'isCorrect'
+        from choices
+        where article_id = #{articleId};
     </select>
 
     <insert id="insertChoice">
-        insert into choices(article_id , content , is_correct )
-        values(#{articleId} , #{content} , #{isCorrect}   );
+        insert into choices(article_id, content, is_correct)
+        values (#{articleId}, #{content}, #{isCorrect});
     </insert>
-
-
 
 
 </mapper>

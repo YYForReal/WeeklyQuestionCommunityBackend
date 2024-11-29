@@ -9,7 +9,7 @@
 4.修改密码：首先验证身份，发送请求验证密码是否正确；输入新密码后update；
 5.绑定邮箱：update email；
 -->
-<mapper namespace="com.hyy.weeklyquestionbackend.dao.UserDao">
+<mapper namespace="com.hyy.weeklyquestionbackend.service.UserDao">
 
     <!--get all user's userId-->
     <select id="getAllUserId" resultType="string">
@@ -32,8 +32,8 @@
 
     <!--insert the login info to database-->
     <insert id="insertLoginInfo">
-        insert into users (user_id, username, password,description)
-        values (#{userId}, #{userId}, #{password},'知道得越多，不知道的就越多。')
+        insert into users (user_id, username, password, description)
+        values (#{userId}, #{userId}, #{password}, '知道得越多，不知道的就越多。')
     </insert>
 
     <!--update the avatar url-->
@@ -87,8 +87,26 @@
         where user_id = #{userId}
     </update>
 
-    <select id="token">
-        select IF(user_id = #{userId} and password = #{password}, "true", "false")
-        from users
+    <!--获取用户发表的文章数量-->
+    <select id="getArticleNumber" parameterType="String" resultType="Integer">
+        SELECT COUNT(*)
+        FROM articles
+        where author_id = #{userId}
+          AND type = 1
     </select>
+
+    <select id="getQuestionNumber" resultType="Integer">
+        SELECT COUNT(*)
+        FROM articles
+        where author_id = #{userId}
+          AND type = 0
+    </select>
+
+    <select id="getChoiceNumber" resultType="Integer">
+        SELECT count(*)
+        FROM articles
+        WHERE author_id = #{userId}
+          AND type = 2
+    </select>
+
 </mapper>

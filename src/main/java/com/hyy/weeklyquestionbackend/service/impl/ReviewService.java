@@ -1,7 +1,7 @@
-package com.hyy.weeklyquestionbackend.service;
+package com.hyy.weeklyquestionbackend.service.impl;
 
 import com.hyy.weeklyquestionbackend.bean.Review;
-import com.hyy.weeklyquestionbackend.dao.ReviewDao;
+import com.hyy.weeklyquestionbackend.service.ReviewDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +15,14 @@ public class ReviewService {
     @Autowired
     ReviewDao reviewDao;
 
-    public List<Review> getReviews(Integer type,Integer articleId) {
-        return reviewDao.getReviews(type,articleId);
+    public List<Review> getReviews(Integer type, Integer articleId) {
+        return reviewDao.getReviews(type, articleId);
     }
 
     public boolean agreeReview(Integer reviewId, Integer agreeNumber) {
-        if(reviewDao.agreeReview(reviewId,agreeNumber) == 1){
+        if (reviewDao.agreeReview(reviewId, agreeNumber) == 1) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -32,11 +32,11 @@ public class ReviewService {
 //      获取当前系统时间和日期并格式化输出:
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         String dateTime = df.format(date); // Formats a Date into a date/time string.
-        System.out.println("post review at : "+ dateTime);  // 2017-09-24 23:33:20
+        System.out.println("post review at : " + dateTime);  // 2017-09-24 23:33:20
 
-        if(reviewDao.postReview(articleId,userId,content,type,dateTime) == 1){
+        if (reviewDao.postReview(articleId, userId, content, type, dateTime) == 1) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }

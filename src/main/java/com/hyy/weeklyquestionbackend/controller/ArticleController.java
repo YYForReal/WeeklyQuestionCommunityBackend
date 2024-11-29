@@ -6,14 +6,12 @@ import com.hyy.weeklyquestionbackend.bean.Article;
 import com.hyy.weeklyquestionbackend.bean.Choice;
 import com.hyy.weeklyquestionbackend.bean.HotArticle;
 import com.hyy.weeklyquestionbackend.bean.PostArticleFrom;
-import com.hyy.weeklyquestionbackend.service.ArticleService;
-import io.swagger.models.auth.In;
+import com.hyy.weeklyquestionbackend.service.impl.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/article")
@@ -36,7 +34,7 @@ public class ArticleController {
     //根据文章id获取文章
     @GetMapping("/getArticleFromId")
     public Article getArticlesFromId(Integer articleId) {
-        Article  article = articleService.getArticleFromId(articleId);
+        Article article = articleService.getArticleFromId(articleId);
         return article;
     }
 
@@ -47,11 +45,15 @@ public class ArticleController {
         return article;
     }
 
-    //根据文章id删除文章
+
+    //删除文章
     @PostMapping("/delete")
-    public Article deleteArticleFromId(Integer articleId) {
-        Article  article = articleService.getArticleFromId(articleId);
-        return article;
+    public String deleteArticle(Integer articleId) {
+        if (articleService.deleteArticle(articleId)) {
+            return "OK";
+        } else {
+            return "fail";
+        }
     }
 
 
@@ -96,7 +98,7 @@ public class ArticleController {
 //    }
 
 
-//    //上传文章
+    //    //上传文章
     @PostMapping("/postArticle")
     public String postArticle(@RequestBody PostArticleFrom postArticleFrom) throws Exception {
         System.out.println(postArticleFrom);
@@ -108,24 +110,22 @@ public class ArticleController {
         String content = postArticleFrom.getContent();
         List<Choice> dynamicItem = postArticleFrom.getDynamicItem();
 
-        if(type==1||type==0||type==2){
-            if(articleService.postArticle(title, content, authorId,type, tags,img)){//没有接连获取id，并发的时候会出现问题。
+        if (type == 1 || type == 0 || type == 2) {
+            if (articleService.postArticle(title, content, authorId, type, tags, img)) {//没有接连获取id，并发的时候会出现问题。
                 String articleId = articleService.getLastInsertId();
-                if(type==2){//普通文章放置成功，额外增设选择题文章
+                if (type == 2) {//普通文章放置成功，额外增设选择题文章
                     System.out.println("查询选择题数据库");
-                    articleService.insertChoices(articleId,postArticleFrom.getDynamicItem());
+                    articleService.insertChoices(articleId, postArticleFrom.getDynamicItem());
                 }
                 return articleId;
-            }else{
+            } else {
                 throw new Exception("error");
             }
-        }else{
+        } else {
             throw new Exception("文章类型错误");
         }
 
     }
-
-
 
 
     //上传图片
@@ -138,20 +138,25 @@ public class ArticleController {
 
     //修改文章
     @PostMapping("/changeArticle")
-    public String changeArticle(Integer articleId,String title,String content){
-        if(articleService.changeArticle(articleId , title, content)){
+    public String changeArticle(Integer articleId, String title, String content) {
+        if (articleService.changeArticle(articleId, title, content)) {
             return "OK";
-        }else{
+        } else {
             return "fail";
         }
     }
 
+
+
+
+
+
     //赞同文章
     @PostMapping("/agree")
-    public String agreeArticle(Integer articleId,Integer agreeNumber){
-        if(articleService.agreeArticle(articleId ,agreeNumber)){
+    public String agreeArticle(Integer articleId, Integer agreeNumber) {
+        if (articleService.agreeArticle(articleId, agreeNumber)) {
             return "OK";
-        }else{
+        } else {
             return "fail";
         }
     }
