@@ -1,6 +1,8 @@
 
 ## 学生问答社区后端
 
+> 项目详细说明及配套前端：https://github.com/YYForReal/WeeklyQuestionCommunity 
+
 技术栈：Springboot
 
 运行配置：
@@ -25,9 +27,4 @@ private String secretKey = "-"; //密钥
 private String bucket = "";//空间名：自己取的（类似于文件夹名字）
 private String path = ""; //域名：官网会给的测试域名或者自己注册一个加速域名
 ~~~
-- 即将实现
-1. 全文检索
-2. 用户关注、收藏、动态
-3. 用户之间私聊
-4. 动态推送已关注的问题（是否有新回答）
-5. 回答的点赞、评论通知
+
